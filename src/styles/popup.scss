@@ -1,0 +1,73 @@
+body {
+  background: var(--gzk-bg);
+  color: var(--gzk-fg);
+  font-family: system-ui, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 13px;
+  margin: 0;
+  width: 260px;
+}
+
+.head {
+  border-bottom: 1px solid var(--gzk-border);
+  padding: 10px 14px;
+}
+
+.brand {
+  color: var(--gzk-accent);
+  font-weight: 600;
+}
+
+.group {
+  border-bottom: 1px solid var(--gzk-border-2);
+  padding: 10px 14px;
+}
+
+.group-title {
+  color: var(--gzk-muted);
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.seg {
+  display: flex;
+  gap: 4px;
+}
+
+.seg button {
+  background: var(--gzk-surface);
+  border: 1px solid var(--gzk-border);
+  border-radius: 6px;
+  color: var(--gzk-fg-2);
+  cursor: pointer;
+  flex: 1;
+  font-size: 12px;
+  padding: 5px 0;
+}
+
+.seg button.active {
+  background: var(--gzk-accent);
+  border-color: var(--gzk-accent);
+  color: var(--gzk-accent-fg);
+}
+
+.row {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.foot {
+  padding: 10px 14px;
+}
+
+.foot button {
+  background: var(--gzk-surface);
+  border: 1px solid var(--gzk-border);
+  border-radius: 6px;
+  color: var(--gzk-fg-2);
+  cursor: pointer;
+  padding: 6px 0;
+  width: 100%;
+}

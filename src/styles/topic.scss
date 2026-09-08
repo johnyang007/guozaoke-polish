@@ -1,0 +1,481 @@
+/*
+ * 话题页视觉。
+ *
+ * 内容脚本 CSS 在 document_start 注入，排在站点样式表之前，同特异性时站点
+ * 规则胜出，因此凡是与 main1003v3.css 抢同一属性的地方都必须写够特异性
+ * （对齐站点自己的选择器层级）或加 !important。
+ */
+
+/* ── 主题正文 ─────────────────────────────── */
+.topic-detail.container-box {
+  padding: 0 !important;
+}
+
+.topic-detail .ui-header {
+  background: var(--gzk-surface) !important;
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  padding: 16px 20px 12px !important;
+}
+
+.topic-detail .ui-header .title {
+  color: var(--gzk-fg) !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+  margin: 0 0 8px !important;
+  padding-right: 60px;
+}
+
+.topic-detail .ui-header .meta,
+.topic-detail .ui-header .meta a {
+  color: var(--gzk-muted) !important;
+  font-size: 13.5px !important;
+}
+
+.topic-detail .ui-header .meta a:hover {
+  color: var(--gzk-accent) !important;
+}
+
+.topic-detail .ui-header .avatar {
+  border-radius: 8px !important;
+  height: 48px !important;
+  width: 48px !important;
+}
+
+.topic-detail .ui-content {
+  color: var(--gzk-fg) !important;
+  /* V2EX 主题正文 15px；16px 在中文下明显偏大。 */
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  padding: 16px 20px !important;
+
+  p {
+    margin: 0 0 1em !important;
+  }
+
+  p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  img {
+    border-radius: 8px;
+    max-width: 100%;
+  }
+
+  a {
+    color: var(--gzk-link) !important;
+  }
+}
+
+/*
+ * 标签行的 padding 和 `border-top: 1px solid #f0f0f0` 是站点写在元素上的
+ * 行内样式，暗色下那道浅灰边就是一根白线；只有 !important 压得住。
+ * V2EX 的标签区与正文之间没有分隔线，直接去掉。
+ */
+.topic-detail .topic-tags {
+  border-top: 0 !important;
+  padding: 0 20px 12px !important;
+}
+
+.topic-detail .topic-tags .tag-badge,
+.topic-tags .tag-badge {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border-2) !important;
+  border-radius: 999px !important;
+  color: var(--gzk-muted) !important;
+  font-size: 12px !important;
+  padding: 3px 10px !important;
+}
+
+.topic-detail .ui-footer {
+  background: var(--gzk-surface-2) !important;
+  border-top: 1px solid var(--gzk-border-2) !important;
+  color: var(--gzk-muted) !important;
+  font-size: 13.5px !important;
+  padding: 11px 20px !important;
+  text-shadow: none !important;
+}
+
+.topic-detail .ui-footer a,
+.topic-detail .ui-footer span {
+  color: var(--gzk-muted) !important;
+  font-size: 13.5px !important;
+  text-shadow: none !important;
+}
+
+.topic-detail .ui-footer a:hover {
+  color: var(--gzk-accent) !important;
+}
+
+/* ── 回复区容器 ───────────────────────────── */
+.topic-reply.container-box {
+  margin-top: 10px !important;
+  padding: 0 !important;
+}
+
+/*
+ * 表头对齐 V2EX：字号提到 16px、颜色用正文色，分隔线随内容左右内缩 24px
+ * （站点原本是通栏细线，视觉上把标题压得很轻）。
+ */
+.topic-reply .ui-header {
+  align-items: baseline;
+  background: var(--gzk-surface) !important;
+  border-bottom: 1px solid var(--gzk-border) !important;
+  color: var(--gzk-fg) !important;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px !important;
+  font-weight: 600;
+  gap: 8px;
+  margin: 0 20px;
+  padding: 14px 0 11px !important;
+}
+
+.topic-reply .ui-header span {
+  color: var(--gzk-fg) !important;
+}
+
+.topic-reply .ui-header .gzk-hot-count {
+  color: var(--gzk-muted) !important;
+  font-size: 14px !important;
+  font-weight: 400;
+}
+
+.topic-reply .ui-content {
+  padding: 0 20px !important;
+}
+
+.topic-reply .ui-footer {
+  background: var(--gzk-surface-2) !important;
+  border-top: 1px solid var(--gzk-border-2) !important;
+  padding: 10px 20px !important;
+}
+
+/* ── 单条回复 ─────────────────────────────── */
+.topic-reply .ui-content .reply-item {
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  margin: 0 -12px;
+  padding: 12px 12px !important;
+  transition: background-color 0.5s ease;
+}
+
+.topic-reply .ui-content .reply-item:last-child {
+  border-bottom: 0 !important;
+}
+
+.topic-reply .ui-content .reply-item:hover {
+  background: var(--gzk-surface-2);
+}
+
+.topic-reply .ui-content .reply-item .avatar {
+  border-radius: 8px !important;
+  height: 40px !important;
+  margin-right: 14px !important;
+  width: 40px !important;
+}
+
+.topic-reply .ui-content .reply-item .main {
+  padding-left: 54px !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta {
+  align-items: center;
+  color: var(--gzk-muted) !important;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px !important;
+  gap: 8px;
+  line-height: 20px;
+  padding: 0 0 6px !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .reply-username {
+  color: var(--gzk-fg-2) !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .username {
+  /* V2EX 的回复用户名是粗体深色、字号与正文齐平，正文才是常规体。 */
+  color: var(--gzk-fg) !important;
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .reply-username:hover .username {
+  color: var(--gzk-accent) !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .time {
+  color: var(--gzk-muted) !important;
+  margin: 0 !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .floor,
+.topic-reply .ui-content .reply-item .main .meta .fr {
+  color: var(--gzk-muted) !important;
+}
+
+/*
+ * 站点用 float:right 把「赞 / 回复图标 / 楼层号」贴到行尾，flex 下浮动失效，
+ * 改用 order 重排成「赞 · 回复 · #楼层」并整体推到行尾。
+ */
+.topic-reply .ui-content .reply-item .main .meta .fr {
+  float: none !important;
+  margin: 0 !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .fr.reply-to.floor {
+  margin-left: auto !important;
+  order: 2;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .fr.reply-to.J_replyTo {
+  order: 3;
+}
+
+.topic-reply .ui-content .reply-item .main .meta span.fr.floor:not(.reply-to) {
+  order: 4;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .J_replyVote {
+  color: var(--gzk-muted) !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .J_replyVote:hover {
+  color: var(--gzk-hot) !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .J_replyTo img {
+  opacity: 0.55;
+}
+
+.topic-reply .ui-content .reply-item:hover .main .meta .J_replyTo img {
+  opacity: 1;
+}
+
+.topic-reply .ui-content .reply-item .main .content {
+  color: var(--gzk-fg) !important;
+  display: block;
+  /* 回复比主题正文再小半档，与 V2EX 的层级一致。 */
+  font-size: 14.5px !important;
+  line-height: 1.75 !important;
+
+  p {
+    margin: 0 0 0.7em;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: var(--gzk-link) !important;
+  }
+
+  img {
+    border-radius: 6px;
+    max-width: 100%;
+  }
+}
+
+/* ── 楼主 ─────────────────────────────────── */
+/*
+ * 楼主的回复整行加一层弱主题底 + 左侧色条，用户名后跟一枚实心「楼主」徽章，
+ * 一眼能从长回复流里挑出来。
+ */
+.topic-reply .ui-content .reply-item.gzk-op {
+  background: color-mix(in srgb, var(--gzk-accent) 7%, transparent) !important;
+  box-shadow: inset 3px 0 0 var(--gzk-accent);
+}
+
+.topic-reply .ui-content .reply-item.gzk-op:hover {
+  background: color-mix(in srgb, var(--gzk-accent) 11%, transparent) !important;
+}
+
+.topic-reply .ui-content .reply-item .main .meta .gzk-op-badge {
+  background: var(--gzk-accent);
+  border-radius: 4px;
+  color: var(--gzk-accent-fg);
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 17px;
+  padding: 0 6px;
+}
+
+/* ── 楼层锚点链接 ─────────────────────────── */
+.gzk-floor-link {
+  color: var(--gzk-muted) !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.gzk-floor-link:hover {
+  color: var(--gzk-accent) !important;
+}
+
+/* ── 引用块（盖楼）─────────────────────────── */
+/*
+ * 引用堆：整条盖楼链由远及近逐层缩进（--gzk-quote-level 由脚本写入），
+ * 超过 3 层的部分折叠在「展开更早的 N 层」后面。
+ */
+.topic-reply .ui-content .reply-item .gzk-quote-stack {
+  margin: 0 0 10px;
+}
+
+.topic-reply .ui-content .reply-item .gzk-quote {
+  background: var(--gzk-surface-2);
+  border: 1px solid var(--gzk-border-2);
+  border-left: 3px solid var(--gzk-border);
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 4px calc(var(--gzk-quote-level, 0) * 14px);
+  padding: 8px 12px;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* .gzk-quote 自己写了 display:block，会盖掉 [hidden]。 */
+.topic-reply .ui-content .reply-item .gzk-quote[hidden] {
+  display: none !important;
+}
+
+.topic-reply .ui-content .reply-item .gzk-quote:last-child {
+  margin-bottom: 0;
+}
+
+.topic-reply .ui-content .reply-item .gzk-quote-more {
+  background: none;
+  border: 0;
+  color: var(--gzk-muted);
+  cursor: pointer;
+  font-size: 12.5px;
+  margin: 0 0 4px;
+  padding: 2px 0;
+}
+
+.topic-reply .ui-content .reply-item .gzk-quote-more:hover {
+  color: var(--gzk-accent);
+}
+
+.topic-reply .ui-content .reply-item .gzk-quote:hover {
+  background: var(--gzk-surface);
+  border-left-color: var(--gzk-accent);
+}
+
+.gzk-quote-who {
+  color: var(--gzk-accent);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.gzk-quote-text {
+  color: var(--gzk-muted);
+}
+
+/* ── 回应数徽章 ───────────────────────────── */
+.gzk-replies-badge {
+  background: var(--gzk-surface-2);
+  border: 1px solid var(--gzk-border-2);
+  border-radius: 999px;
+  color: var(--gzk-muted);
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 18px;
+  padding: 0 9px;
+}
+
+.gzk-replies-badge:hover {
+  border-color: var(--gzk-accent);
+  color: var(--gzk-accent);
+}
+
+/* ── 热门回复区 ───────────────────────────── */
+.topic-reply .gzk-hot-box {
+  background: var(--gzk-surface-2);
+  border-bottom: 1px solid var(--gzk-border-2);
+  padding: 12px 20px 14px;
+}
+
+.gzk-hot-title {
+  align-items: center;
+  color: var(--gzk-fg);
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.gzk-hot-title::before {
+  background: var(--gzk-hot);
+  border-radius: 2px;
+  content: '';
+  display: block;
+  height: 14px;
+  width: 3px;
+}
+
+.gzk-hot-item {
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 10px;
+  line-height: 1.7;
+  padding: 4px 8px;
+}
+
+.gzk-hot-item:hover {
+  background: var(--gzk-surface);
+}
+
+.gzk-hot-meta {
+  color: var(--gzk-accent);
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.gzk-hot-text {
+  color: var(--gzk-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── 长回复折叠 ───────────────────────────── */
+.reply-item.gzk-collapsed .content {
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent);
+  mask-image: linear-gradient(180deg, #000 62%, transparent);
+  max-height: var(--gzk-collapse-height, 240px);
+  overflow: hidden;
+}
+
+.gzk-collapse-toggle {
+  background: none;
+  border: 0;
+  color: var(--gzk-accent);
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 4px;
+  padding: 2px 0;
+}
+
+.gzk-collapse-toggle:hover {
+  text-decoration: underline;
+}
+
+/* ── 跳转高亮 ─────────────────────────────── */
+.gzk-highlight {
+  background: color-mix(in srgb, var(--gzk-accent) 14%, transparent) !important;
+}
+
+/* ── 分页合并提示 ─────────────────────────── */
+.gzk-merge-tip {
+  color: var(--gzk-muted);
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: auto;
+}

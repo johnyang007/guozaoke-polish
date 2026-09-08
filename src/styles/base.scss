@@ -1,0 +1,447 @@
+html[data-gzk-theme] {
+  color-scheme: light;
+}
+
+html[data-gzk-theme='dark'] {
+  color-scheme: dark;
+}
+
+/*
+ * 站点把墙纸贴图铺在 html 上，body 只有内容那么高，页面不满一屏时下方
+ * 会露出一大片贴图底色。html 一起换成主题背景，并把 body 撑满视口、
+ * 页脚推到底部。
+ */
+html {
+  background: var(--gzk-bg) !important;
+}
+
+body {
+  background: var(--gzk-bg) !important;
+  color: var(--gzk-fg) !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/*
+ * 站点在 html 和 body 上各写了一份 `font-family: ... !important`，中文落到
+ * 冬青黑体（Hiragino Sans GB）——笔画比苹方细，正文看着发虚。这里用 html
+ * 前缀把特异性抬过站点的单元素选择器，换回系统栈（macOS 上即 SF + 苹方），
+ * 与 V2EX 的观感一致。表单控件默认不继承字体，单独补一条。
+ */
+html:root,
+html body {
+  font-family:
+    system-ui,
+    -apple-system,
+    'PingFang SC',
+    'Microsoft YaHei',
+    'Helvetica Neue',
+    sans-serif !important;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+a,
+a:hover {
+  color: var(--gzk-link);
+}
+
+/* 顶部导航 */
+.navbar.top-navbar {
+  background: var(--gzk-surface) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--gzk-border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.navbar.top-navbar .navbar-nav > li > a {
+  color: var(--gzk-fg-2) !important;
+  font-size: 14px;
+}
+
+.navbar.top-navbar .navbar-nav > .active > a,
+.navbar.top-navbar .navbar-nav > li > a:hover {
+  background: transparent !important;
+  color: var(--gzk-accent) !important;
+}
+
+/*
+ * 品牌与导航之间的竖分隔条：站点用「0 宽 + 一白一灰两条边框」实现，
+ * 深色下就是两根刺眼的白杠。V2EX 没有这道分隔，直接去掉。
+ */
+.top-navbar .divider-vertical {
+  display: none !important;
+}
+
+/*
+ * 站点大量使用白色文字投影（拟物遗留），深色下等于给每个字描白边，
+ * 一律清掉。
+ */
+.container-box,
+.container-box *,
+.navbar,
+.navbar * {
+  text-shadow: none !important;
+}
+
+/* 卡片容器 */
+.container-box {
+  background: var(--gzk-surface) !important;
+  border: 1px solid var(--gzk-border) !important;
+  border-radius: var(--gzk-radius) !important;
+  box-shadow: var(--gzk-shadow);
+  overflow: hidden;
+}
+
+.container-box .ui-header {
+  background: var(--gzk-surface-2) !important;
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  color: var(--gzk-fg-2) !important;
+}
+
+.container-box .ui-footer {
+  background: var(--gzk-surface-2) !important;
+  border-top: 1px solid var(--gzk-border-2) !important;
+}
+
+/* ── 栏目布局 ─────────────────────────────── */
+/*
+ * 站点给右栏挂了 .mt10、左栏没有，两栏顶部因此差 10px；整体外边距也比
+ * V2EX 松，一并收紧。
+ */
+.container.mt15 {
+  margin-top: 10px !important;
+}
+
+.sidebar-right.mt10 {
+  margin-top: 0 !important;
+}
+
+/*
+ * 吸顶个人信息卡的前提：粘性元素的包含块是右栏，而右栏是浮动的、只有自身
+ * 内容那么高，卡片滚过右栏底部就跟丢了。把两栏改成 flex 等高（浮动在 flex
+ * 容器里失效，col-md-* 的百分比宽度仍然生效），右栏才能撑满整行。
+ * 窄屏保持站点原来的堆叠。
+ */
+@media (min-width: 992px) {
+  .container.mt15 > .row {
+    display: flex;
+  }
+
+  /* Bootstrap 的 clearfix 伪元素在 flex 下会变成两个多余的 flex item。 */
+  .container.mt15 > .row::before,
+  .container.mt15 > .row::after {
+    display: none;
+  }
+
+  .container.mt15 > .row > .sidebar-left,
+  .container.mt15 > .row > .sidebar-right {
+    min-width: 0;
+  }
+
+  .sidebar-right .usercard.container-box {
+    position: sticky;
+    top: 10px;
+    z-index: 5;
+  }
+}
+
+/* ── 侧栏 ─────────────────────────────────── */
+.container-box .ui-header {
+  /* 站点把部分头部留在 inline-block 上，背景会缩到文字宽度。 */
+  display: block !important;
+  padding: 9px 12px !important;
+}
+
+/*
+ * 站点在标题上又挂了一条 border-bottom（还带 -1px 负边距），叠在卡片头部
+ * 自己的分隔线上，看起来就是一条对不齐的横杠。只留卡片那条。
+ */
+.container-box .ui-header .title {
+  border-bottom: 0 !important;
+  color: var(--gzk-fg) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.sidebox .ui-content {
+  line-height: 1.55 !important;
+}
+
+.sidebox .cell {
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  line-height: 1.55 !important;
+  padding: 8px 12px !important;
+}
+
+.sidebox .cell:last-child {
+  border-bottom: 0 !important;
+}
+
+.sidebox .cell .avatar {
+  border-radius: 6px !important;
+}
+
+.hot_topic_title a {
+  color: var(--gzk-fg-2) !important;
+  font-size: 14px !important;
+}
+
+.hot_topic_title a:hover {
+  color: var(--gzk-accent) !important;
+}
+
+/* 个人信息卡：站点头部铺的是一张浅灰贴图 + 白字，深色下必然违和。 */
+.usercard .ui-header {
+  background: var(--gzk-surface-2) !important;
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  color: var(--gzk-fg) !important;
+  padding: 12px !important;
+  position: relative;
+}
+
+.usercard .ui-header .avatar {
+  border-radius: 8px !important;
+  height: 38px !important;
+  margin-right: 10px !important;
+  width: 38px !important;
+}
+
+.usercard .ui-header .username,
+.usercard .username {
+  color: var(--gzk-fg) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.usercard .ui-content .status {
+  border-right: 1px solid var(--gzk-border-2) !important;
+  margin: 8px 0 !important;
+}
+
+.usercard .ui-content .status strong {
+  color: var(--gzk-fg) !important;
+  font-size: 14px !important;
+}
+
+.usercard .ui-content .status,
+.usercard .ui-content .status a,
+.usercard .ui-content a,
+.usercard .status,
+.usercard .status a {
+  color: var(--gzk-muted) !important;
+  font-size: 12px !important;
+}
+
+.login-box .ui-header,
+.login-box {
+  position: relative;
+}
+
+/* ── 主题切换（浅色 / 深色 / 跟随系统）─────── */
+.gzk-theme-switch {
+  align-items: center;
+  background: var(--gzk-surface);
+  border: 1px solid var(--gzk-border);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 2;
+}
+
+.gzk-theme-switch button {
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  color: var(--gzk-muted);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 4px 8px;
+}
+
+.gzk-theme-switch button:hover {
+  color: var(--gzk-fg);
+}
+
+.gzk-theme-switch button[aria-pressed='true'] {
+  background: var(--gzk-accent);
+  color: var(--gzk-accent-fg);
+}
+
+/* 宿主给控件让出右上角。 */
+.gzk-switch-host {
+  padding-right: 104px !important;
+}
+
+.navbar-right.gzk-switch-host {
+  padding-right: 0 !important;
+}
+
+/* 退到导航栏时不做绝对定位。 */
+.gzk-theme-switch-slot .gzk-theme-switch {
+  margin: 9px 0 0 10px;
+  position: static;
+}
+
+/* 表单与按钮 */
+.form-control {
+  background: var(--gzk-surface) !important;
+  border: 1px solid var(--gzk-border) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  color: var(--gzk-fg) !important;
+}
+
+.btn {
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.btn-default {
+  background: var(--gzk-surface) !important;
+  border-color: var(--gzk-border) !important;
+  color: var(--gzk-fg-2) !important;
+}
+
+.btn-primary,
+.btn-success {
+  background: var(--gzk-accent) !important;
+  border-color: var(--gzk-accent) !important;
+  color: var(--gzk-accent-fg) !important;
+}
+
+.alert {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border) !important;
+  border-radius: var(--gzk-radius) !important;
+  color: var(--gzk-fg-2) !important;
+}
+
+.dropdown-menu {
+  background: var(--gzk-surface) !important;
+  border: 1px solid var(--gzk-border) !important;
+  border-radius: var(--gzk-radius) !important;
+  box-shadow: var(--gzk-shadow) !important;
+}
+
+.dropdown-menu > li > a {
+  color: var(--gzk-fg-2) !important;
+}
+
+.dropdown-menu > li > a:hover {
+  background: var(--gzk-surface-2) !important;
+  color: var(--gzk-accent) !important;
+}
+
+/* 分页 */
+.pagination > li > a,
+.pagination > li > span {
+  background: var(--gzk-surface) !important;
+  border-color: var(--gzk-border) !important;
+  color: var(--gzk-fg-2) !important;
+}
+
+.pagination > .active > a,
+.pagination > .active > span {
+  background: var(--gzk-accent) !important;
+  border-color: var(--gzk-accent) !important;
+  color: var(--gzk-accent-fg) !important;
+}
+
+.pagination > .disabled > a {
+  color: var(--gzk-muted) !important;
+}
+
+/* 标签页 */
+.nav-pills > li > a {
+  border-radius: 6px !important;
+  color: var(--gzk-fg-2) !important;
+}
+
+/*
+ * Bootstrap 的浅灰 hover 底（#eee / #f5f5f5 / #e6e6e6）在深色下就是一块白斑
+ * 盖住浅色文字，凡是站点用到的都换成主题面板色。
+ */
+.nav > li > a:hover,
+.nav > li > a:focus,
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background: var(--gzk-surface-2) !important;
+  color: var(--gzk-fg) !important;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active {
+  background: var(--gzk-surface-2) !important;
+  border-color: var(--gzk-border) !important;
+  color: var(--gzk-fg) !important;
+}
+
+.pagination > li > a:hover,
+.pagination > li > a:focus,
+.pagination > li > span:hover {
+  background: var(--gzk-surface-2) !important;
+  border-color: var(--gzk-border) !important;
+  color: var(--gzk-fg) !important;
+}
+
+.table-hover > tbody > tr:hover {
+  background: var(--gzk-surface-2) !important;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  background: var(--gzk-accent) !important;
+  color: var(--gzk-accent-fg) !important;
+}
+
+/* 代码块 */
+pre,
+code {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border-2) !important;
+  border-radius: 6px !important;
+  color: var(--gzk-fg) !important;
+}
+
+/* 页脚 */
+body > * {
+  flex: 0 0 auto;
+}
+
+.footer {
+  border-top: 1px solid var(--gzk-border) !important;
+  margin-top: auto !important;
+}
+
+.footer,
+.footer-bg {
+  background: transparent !important;
+}
+
+.footer .links span,
+.footer .links a,
+.footer .fade-color {
+  color: var(--gzk-muted) !important;
+}

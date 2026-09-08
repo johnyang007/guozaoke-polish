@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>过早客 Polish</title>
+    <link rel="stylesheet" href="../css/theme-var.css" />
+    <link rel="stylesheet" href="../css/popup.css" />
+  </head>
+  <body>
+    <header class="head">
+      <span class="brand">过早客 Polish</span>
+    </header>
+
+    <section class="group">
+      <div class="group-title">主题</div>
+      <div class="seg" id="theme">
+        <button type="button" data-theme="auto">跟随系统</button>
+        <button type="button" data-theme="light">浅色</button>
+        <button type="button" data-theme="dark">深色</button>
+      </div>
+    </section>
+
+    <section class="group">
+      <div class="group-title">列表页</div>
+      <label class="row"
+        ><input type="checkbox" data-path="home.readMarker" /><span>已读主题淡化</span></label
+      >
+      <label class="row"
+        ><input type="checkbox" data-path="home.heatBadge" /><span>回复数热度着色</span></label
+      >
+    </section>
+
+    <section class="group">
+      <div class="group-title">话题页</div>
+      <label class="row"
+        ><input type="checkbox" data-path="topic.quote" /><span>显示引用关系</span></label
+      >
+      <label class="row"
+        ><input type="checkbox" data-path="topic.hotReplies" /><span>热门回复区</span></label
+      >
+      <label class="row"
+        ><input type="checkbox" data-path="topic.collapse" /><span>长回复折叠</span></label
+      >
+      <label class="row"
+        ><input type="checkbox" data-path="topic.anchor" /><span>楼层锚点与跳转</span></label
+      >
+      <label class="row"
+        ><input type="checkbox" data-path="topic.mergePages" /><span>合并分页回复</span></label
+      >
+    </section>
+
+    <footer class="foot">
+      <button type="button" id="open-options">更多设置</button>
+    </footer>
+
+    <script src="../scripts/popup.min.js"></script>
+  </body>
+</html>

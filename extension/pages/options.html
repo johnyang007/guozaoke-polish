@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>过早客 Polish 设置</title>
+    <link rel="stylesheet" href="../css/theme-var.css" />
+    <link rel="stylesheet" href="../css/options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>过早客 Polish 设置</h1>
+
+      <section class="card">
+        <h2>话题页</h2>
+        <label class="row"
+          ><span>热门回复赞数阈值</span><input type="number" min="1" id="hot-threshold"
+        /></label>
+        <label class="row"
+          ><span>长回复折叠高度（px）</span><input type="number" min="80" id="collapse-height"
+        /></label>
+      </section>
+
+      <section class="card">
+        <h2>屏蔽规则</h2>
+        <div class="rule-form">
+          <select id="rule-type">
+            <option value="keyword">标题关键词</option>
+            <option value="node">节点 slug</option>
+            <option value="user">用户名</option>
+          </select>
+          <input type="text" id="rule-value" placeholder="输入要屏蔽的内容" />
+          <button type="button" id="rule-add">添加</button>
+        </div>
+        <ul class="rule-list" id="rule-list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>数据</h2>
+        <div class="actions">
+          <button type="button" id="clear-read">清空已读记录</button>
+          <button type="button" id="export">导出配置</button>
+          <button type="button" id="import">导入配置</button>
+        </div>
+        <textarea
+          id="io"
+          rows="6"
+          placeholder="导出的配置会显示在这里；粘贴配置后点击导入"
+        ></textarea>
+      </section>
+
+      <p class="status" id="status"></p>
+    </main>
+    <script src="../scripts/options.min.js"></script>
+  </body>
+</html>

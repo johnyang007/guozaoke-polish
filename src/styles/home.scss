@@ -1,0 +1,227 @@
+/*
+ * 列表页视觉。
+ *
+ * 与话题页同理：内容脚本 CSS 在 document_start 注入，排在站点样式表之前，
+ * 选择器必须对齐站点自身的层级（.topics .topic-item …），否则会被
+ * main1003v3.css 覆盖——深色模式下表现为浅灰边框、白色文字投影、
+ * 浅底节点标签等一堆刺眼残留。
+ */
+
+/* ── 列表容器 ─────────────────────────────── */
+.topics.container-box {
+  padding: 0 !important;
+}
+
+.topics .ui-header {
+  padding: 9px 14px !important;
+}
+
+/* 顶部节点快捷入口 */
+.topics .hotlink {
+  border-bottom: 1px solid var(--gzk-border) !important;
+  margin: 0 !important;
+  /* 页签自带 4px 10px 内边距，容器只补到与列表项左对齐（4+2+10=16px）。 */
+  padding: 8px 4px !important;
+  text-shadow: none !important;
+}
+
+/*
+ * 页签做成 V2EX 那样的选择框：常态无底、悬停浅灰胶囊、当前节点实心胶囊。
+ * 站点不给当前页签任何标记，选中态由 home 内容脚本按路径补 .gzk-tab-active。
+ */
+.topics .hotlink a,
+.topics .ui-header .bread-nav a {
+  border-radius: 6px !important;
+  color: var(--gzk-fg-2) !important;
+  display: inline-block !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+  margin: 0 2px !important;
+  padding: 4px 10px !important;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.topics .hotlink a:hover,
+.topics .ui-header .bread-nav a:hover {
+  background: var(--gzk-surface-2) !important;
+  color: var(--gzk-fg) !important;
+}
+
+.topics .hotlink a.gzk-tab-active,
+.topics .hotlink a.gzk-tab-active:hover {
+  /* V2EX 的当前页签是中性深色实心块，深色下自动反相为浅底深字。 */
+  background: var(--gzk-fg) !important;
+  color: var(--gzk-bg) !important;
+  font-weight: 600 !important;
+}
+
+/* ── 单条主题 ─────────────────────────────── */
+.topics .topic-item {
+  /* 站点上下各一条 1px 亮灰线，深色下像给每行描边，只留底部一条。 */
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  border-top: 0 !important;
+  line-height: 1.6 !important;
+  margin: 0 !important;
+  padding: 13px 60px 13px 16px !important;
+  transition: background-color 0.15s ease;
+}
+
+.topics .topic-item:last-child {
+  border-bottom: 0 !important;
+}
+
+.topics .topic-item:hover {
+  background: var(--gzk-surface-2) !important;
+}
+
+.topics .topic-item .avatar {
+  border-radius: 8px !important;
+  height: 40px !important;
+  margin: 0 12px 0 0 !important;
+  width: 40px !important;
+}
+
+.topics .topic-item .main {
+  padding: 0 0 0 52px !important;
+}
+
+.topics .topic-item .title {
+  color: var(--gzk-fg) !important;
+  font-size: 15.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  margin: 0 0 5px !important;
+  text-shadow: none !important;
+}
+
+.topics .topic-item .title a {
+  color: var(--gzk-fg) !important;
+}
+
+.topics .topic-item .title a:hover {
+  color: var(--gzk-accent) !important;
+}
+
+.topics .topic-item .meta,
+.topics .topic-item .meta a,
+.topics .topic-item .meta span {
+  color: var(--gzk-muted) !important;
+  font-size: 12.5px !important;
+}
+
+.topics .topic-item .meta .node {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border-2) !important;
+  border-radius: 4px !important;
+  padding: 2px 7px !important;
+}
+
+.topics .topic-item .meta .node a {
+  color: var(--gzk-fg-2) !important;
+}
+
+.topics .topic-item .meta .username,
+.topics .topic-item .meta .username a,
+.topics .topic-item .meta .last-reply-username strong {
+  color: var(--gzk-fg-2) !important;
+  font-weight: 500 !important;
+}
+
+/* ── 回复数 ───────────────────────────────── */
+.topics .topic-item .count {
+  background: transparent !important;
+  right: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+
+.topics .topic-item .count a,
+.topics .topic-item .count a:visited {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border-2) !important;
+  border-radius: 999px !important;
+  color: var(--gzk-muted) !important;
+  font-size: 12px !important;
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+  padding: 1px 8px !important;
+  text-align: center;
+}
+
+.topics .topic-item .count a.gzk-heat-mid {
+  color: var(--gzk-warm) !important;
+}
+
+.topics .topic-item .count a.gzk-heat-high {
+  background: var(--gzk-hot) !important;
+  border-color: var(--gzk-hot) !important;
+  color: #fff !important;
+}
+
+/* ── 已读 / 屏蔽 ──────────────────────────── */
+.topics .topic-item.gzk-read .title a {
+  color: var(--gzk-muted) !important;
+}
+
+.topic-item.gzk-blocked > *:not(.gzk-block-placeholder) {
+  display: none !important;
+}
+
+.gzk-block-placeholder {
+  color: var(--gzk-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.gzk-block-placeholder:hover {
+  color: var(--gzk-accent);
+}
+
+/* ── 侧栏 ─────────────────────────────────── */
+.sidebox .cell {
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  padding: 10px 12px !important;
+}
+
+.sidebox .cell:last-child {
+  border-bottom: 0 !important;
+}
+
+.hot-nodes a {
+  background: var(--gzk-surface-2) !important;
+  border: 1px solid var(--gzk-border-2) !important;
+  border-radius: 999px !important;
+  color: var(--gzk-fg-2) !important;
+  padding: 2px 9px !important;
+  text-shadow: none !important;
+}
+
+.hot-nodes a:hover {
+  border-color: var(--gzk-accent) !important;
+  color: var(--gzk-accent) !important;
+}
+
+.nodes-cloud .title {
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+  color: var(--gzk-fg-2) !important;
+  text-shadow: none !important;
+}
+
+.nodes-cloud ul li {
+  border-bottom: 1px solid var(--gzk-border-2) !important;
+}
+
+.nodes-cloud ul li label {
+  color: var(--gzk-muted) !important;
+}
+
+.nodes-cloud ul li .nodes a {
+  color: var(--gzk-fg-2) !important;
+}
+
+.nodes-cloud ul li .nodes a:hover {
+  color: var(--gzk-accent) !important;
+}
