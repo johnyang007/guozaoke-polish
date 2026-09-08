@@ -16,3 +16,6 @@ samples/
 
 # 本地原始截图（Retina 原图）。发布用的压缩版在 docs/screenshots/。
 screenshot/
+
+# 发帖草稿：含网盘提取码，不入库。
+post.md
