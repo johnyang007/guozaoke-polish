@@ -1,6 +1,11 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
+// 版本号以 package.json 为准，免得两处各写一份、发版时漏改其中一个
+const pkg = JSON.parse(
+  fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+) as { version: string }
+
 const HOSTS = ['guozaoke.com', 'www.guozaoke.com']
 const matches = HOSTS.map((h) => `https://${h}/*`)
 const topicMatches = HOSTS.map((h) => `https://${h}/t/*`)
@@ -8,7 +13,7 @@ const topicMatches = HOSTS.map((h) => `https://${h}/t/*`)
 const manifest: chrome.runtime.ManifestV3 = {
   manifest_version: 3,
   name: '过早客 Polish',
-  version: '0.1.0',
+  version: pkg.version,
   description:
     '为过早客（guozaoke.com）带来现代化的浏览体验：界面美化、深色模式、列表增强与话题页阅读增强。',
   permissions: ['storage'],
