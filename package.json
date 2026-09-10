@@ -21,7 +21,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "preview": "tsx scripts/preview.ts"
+    "preview": "tsx scripts/preview.ts",
+    "release": "tsx scripts/release.ts"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.271",

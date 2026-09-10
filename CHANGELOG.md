@@ -2,6 +2,12 @@
 
 本项目遵循[语义化版本](https://semver.org/lang/zh-CN/)，格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [Unreleased]
+
+### 内部
+
+- 新增 `pnpm release <patch|minor|major|1.2.3>`：一条命令走完定版 CHANGELOG、构建、校验 manifest 版本、提交、打 tag、推送、创建 GitHub Release，支持 `--dry-run` 先看计划
+
 ## [0.1.1] - 2026-09-10
 
 ### 变更
