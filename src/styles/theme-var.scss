@@ -1,36 +1,40 @@
 :root {
-  --gzk-bg: #f4f5f7;
+  --gzk-bg: #f7f6f3;
   --gzk-surface: #fff;
-  --gzk-surface-2: #fafafa;
-  --gzk-fg: #16181d;
-  --gzk-fg-2: #383d45;
-  --gzk-muted: #6b7078;
-  --gzk-border: #e6e8eb;
-  --gzk-border-2: #f0f1f3;
+  --gzk-surface-2: #faf9f6;
+  --gzk-fg: #1a1815;
+  --gzk-fg-2: #3d3a35;
+  --gzk-muted: #74706a;
+  --gzk-border: #e8e5df;
+  --gzk-border-2: #f0eeea;
   --gzk-accent: #d97706;
   --gzk-accent-fg: #fff;
   --gzk-link: #1f6feb;
   --gzk-hot: #dc2626;
   --gzk-warm: #ea580c;
-  --gzk-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+  --gzk-shadow: 0 1px 2px rgb(28 24 18 / 4%), 0 1px 3px -1px rgb(28 24 18 / 6%);
+  --gzk-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+  --gzk-bg-glow: radial-gradient(100% 100% at 50% 0%, rgb(255 251 240 / 92%) 0%, rgb(255 251 240 / 42%) 38%, rgb(255 251 240 / 0%) 100%);
   --gzk-radius: 8px;
 }
 
 @mixin gzk-dark {
-  --gzk-bg: #16181c;
-  --gzk-surface: #1d2025;
-  --gzk-surface-2: #24282e;
-  --gzk-fg: #eaedf1;
-  --gzk-fg-2: #c6ccd4;
-  --gzk-muted: #98a0aa;
-  --gzk-border: #2f343b;
-  --gzk-border-2: #262a30;
+  --gzk-bg: #171614;
+  --gzk-surface: #201e1b;
+  --gzk-surface-2: #282521;
+  --gzk-fg: #eeebe6;
+  --gzk-fg-2: #cbc6bf;
+  --gzk-muted: #9c968d;
+  --gzk-border: #363330;
+  --gzk-border-2: #2a2724;
   --gzk-accent: #f0a13a;
-  --gzk-accent-fg: #16181c;
+  --gzk-accent-fg: #171614;
   --gzk-link: #6aa6ff;
   --gzk-hot: #f87171;
   --gzk-warm: #fb923c;
-  --gzk-shadow: 0 1px 2px rgb(0 0 0 / 40%);
+  --gzk-shadow: 0 1px 2px rgb(0 0 0 / 32%), 0 1px 3px -1px rgb(0 0 0 / 24%);
+  --gzk-bg-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  --gzk-bg-glow: radial-gradient(100% 100% at 50% 0%, rgb(255 206 138 / 7%) 0%, rgb(255 206 138 / 3%) 38%, rgb(255 206 138 / 0%) 100%);
 }
 
 @media (prefers-color-scheme: dark) {

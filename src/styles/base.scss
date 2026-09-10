@@ -10,13 +10,23 @@ html[data-gzk-theme='dark'] {
  * 站点把墙纸贴图铺在 html 上，body 只有内容那么高，页面不满一屏时下方
  * 会露出一大片贴图底色。html 一起换成主题背景，并把 body 撑满视口、
  * 页脚推到底部。
+ *
+ * 底色上再叠两层：顶部一道 480px 高的暖光晕（导航栏之下向内容渐隐，质感
+ * 来自光而非图案），以及 5% 的灰度噪点（内联 SVG feTurbulence，无需外部
+ * 资源），让纯色块有微观起伏、不至于发死。两层都只铺在 html 上，body 透明
+ * 透出来，免得叠加把颗粒压成两倍浓度。光晕这层必须限高，否则 radial 的
+ * 百分比会按整个文档高度算，长页面上摊成一片看不出来。
  */
 html {
-  background: var(--gzk-bg) !important;
+  background-color: var(--gzk-bg) !important;
+  background-image: var(--gzk-bg-glow), var(--gzk-bg-image) !important;
+  background-repeat: no-repeat, repeat !important;
+  background-size: 100% 480px, auto !important;
+  background-position: 50% 0, 0 0 !important;
 }
 
 body {
-  background: var(--gzk-bg) !important;
+  background: rgba(0, 0, 0, 0) !important;
   color: var(--gzk-fg) !important;
   display: flex;
   flex-direction: column;
